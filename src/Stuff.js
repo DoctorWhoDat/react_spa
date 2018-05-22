@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 // import * as dx from "devextreme";
-import * as devextremeReact from "devextreme-react";
+import { TextBox, Button, DataGrid } from "devextreme-react";
 // import * as dx from 'devextreme/data/data_source';
 import { rand } from "./Main";
 // import {ArrayStore}  from "devextreme";
-
 var x = [
     { name: 'BLAAAAhhhh', title: 'You know it' },
     { name: 'Test2', title: 'A title' }
@@ -23,25 +22,36 @@ class Stuff extends Component {
                 {/* <dx.Button></dx.Button> */}
                 <div className="flexbox-container">
                     <div className="item-panel xsmallitem">
-                        <devextremeReact.TextBox value={this.state.textItem}
+                        <TextBox value={this.state.textItem} ref={(ref) => ref ? this.dxTextBox = ref.instance : null}
                             onValueChanged={(e) => {
                                 this.setState({ textItem: e.value });
                             }}
-                        />{/*ref={(ref) => {this.TextBox = ref.instance}}*/}
+                        />
                         <br />
-                        <devextremeReact.Button text="Blah" type="danger"
+                        <Button text="Blah" type="danger"
                             onClick={
                                 () => {
                                     var z = rand(1, 100);
                                     var y = rand(101, 200);
-                                    //this.TextBox.option('value',rand(z,y)+ " " + z + " " + y);
+                                    this.dxTextBox.focus();
+                                    // this.dxTextBox.option('value',rand(z,y)+ " " + z + " " + y);
                                     this.setState({ textItem: `${z + y} ${z} dsfsdaf ${y}` });
                                 }
                             }
-                        ></devextremeReact.Button>
+                        />
                     </div>
                     <div className="item-panel bigitem">
-                        <devextremeReact.DataGrid dataSource={x} />
+                        <DataGrid dataSource={x} />
+                    </div>
+                    <div className="item-panel maxitem">
+                        <TextBox
+                            ref={(ref) => ref ? this.textBox = ref.instance : null}
+                            value={this.state.text}
+                            onValueChanged={this.handleChange}
+                            valueChangeEvent='input'
+                        />
+
+                        <Button text='Go to the TextBox' onClick={() => this.textBox.focus()} />
                     </div>
                 </div>
             </div>
