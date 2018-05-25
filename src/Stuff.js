@@ -44,6 +44,7 @@ class Stuff extends Component {
                         <DataGrid dataSource={x} />
                     </div>
                     <div className="item-panel maxitem">
+                    <h1>Paul Stuff</h1>
                         <TextBox
                             ref={(ref) => ref ? this.textBox = ref.instance : null}
                             value={this.state.text}
