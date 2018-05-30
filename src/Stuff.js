@@ -11,6 +11,15 @@ var x = [
     { name: 'BLAAAAhhhh', title: 'You know it' },
     { name: 'Test2', title: 'A title' }
 ];
+
+// let arr = [
+//     { club: 'Davy Crocket', time: '8PM', date: 'May 30, 2017' },
+//     { club: 'GHS', time: '8PM', date: 'May 30, 2018' },
+//     { club: 'ROT', time: '3PM', date: 'June 2, 2018' },
+//     { club: 'OPT', time: '8PM', date: 'July 1, 2018' },
+//     { club: 'OPT', time: '8PM', date: 'July 1, 2019' }
+// ];
+
 class Stuff extends Component {
     constructor(props) {
         super(props);
@@ -58,6 +67,7 @@ class Stuff extends Component {
                         <Button text='Go to the TextBox' onClick={() => this.textBox.focus()} />
                     </div>
                     <div className="item-panel xsmallitem">
+                        {/* <List array={arr} /> passes prop called array*/}
                         <List />
                     </div>
                 </div>

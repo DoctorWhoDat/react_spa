@@ -9,6 +9,8 @@ let arr = [
     { club: 'OPT', time: '8PM', date: 'July 1, 2019' }
 ];
 
+let x = '';
+
 function build() {
     let list = [];
     let current = 0;
@@ -28,7 +30,7 @@ function build() {
     });
     return (
         <div className='customList'>
-            <h1 className='year-header'>SPECIAL GAMES CALENDAR</h1>
+            <h1 className='year-header' style={{padding: '5px 0px 5px 0px'}}>SPECIAL GAMES CALENDAR {x}</h1>
             <ul>{list}</ul>
         </div>
     );
@@ -39,6 +41,8 @@ class List extends Component {
         this.state = {
 
         }
+        // x = props.array;
+        // access prop called array
     }
 
     render() { return (build()); }
