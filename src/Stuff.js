@@ -4,6 +4,9 @@ import { TextBox, Button, DataGrid } from "devextreme-react";
 // import * as dx from 'devextreme/data/data_source';
 import { rand } from "./Main";
 // import {ArrayStore}  from "devextreme";
+
+import List from "./components/list";
+
 var x = [
     { name: 'BLAAAAhhhh', title: 'You know it' },
     { name: 'Test2', title: 'A title' }
@@ -43,8 +46,8 @@ class Stuff extends Component {
                     <div className="item-panel bigitem">
                         <DataGrid dataSource={x} />
                     </div>
-                    <div className="item-panel maxitem">
-                    <h1>Paul Stuff</h1>
+                    <div className="item-panel bigitem">
+                        <h1>Paul Stuff</h1>
                         <TextBox
                             ref={(ref) => ref ? this.textBox = ref.instance : null}
                             value={this.state.text}
@@ -53,6 +56,9 @@ class Stuff extends Component {
                         />
 
                         <Button text='Go to the TextBox' onClick={() => this.textBox.focus()} />
+                    </div>
+                    <div className="item-panel xsmallitem">
+                        <List />
                     </div>
                 </div>
             </div>

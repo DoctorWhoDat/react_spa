@@ -6,7 +6,7 @@ body {
 }
 
 h1, h2, p, ul, li {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 .grid-container {
   border: solid 4px #000;
@@ -156,4 +156,21 @@ h1, h2, p, ul, li {
   box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
   border-radius: 5px;
   overflow: hidden;
+}
+
+.customList ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.customList {
+  text-align: center;
+  border: solid 1px;
+}
+.year-header {
+  /* text-align: center; */
+  background-color: orange;
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
 }
