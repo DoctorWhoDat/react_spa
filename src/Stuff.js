@@ -6,7 +6,7 @@ import { rand } from "./Main";
 // import {ArrayStore}  from "devextreme";
 import List from "./components/list";
 import moment from "moment";
-import y from "./data/weekly";
+import Schedules from "./data/weekly";
 var x = [
     { name: 'BLAAAAhhhh', title: 'You know it' },
     { name: 'Test2', title: 'A title' }
@@ -71,12 +71,7 @@ class Stuff extends Component {
                         <List />
                     </div>
                     <div className='item-panel maxitem'>
-                        <Scheduler
-                            // dataSource={[{text: 'safd', startDate: moment(), endDate: moment().add(1,'h'), day: 'Monday'}]} 
-                            dataSource={y}
-                            views= {["month", "workWeek", "day"]}
-                            resources={[{fieldExpr: 'day', dataSource: {id: 'Monday', color: '#D9534F'}}]}
-                        />
+                        <Schedules view='day' />
                     </div>
                 </div>
             </div>

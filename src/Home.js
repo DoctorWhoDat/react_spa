@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
-
+import Schedules from "./data/weekly";
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -18,6 +18,7 @@ class Home extends Component {
                     <div className="item-panel xsmallitem"><p>Testing123</p></div>
                     <div className="item-panel bigitem"><p>Testing123 {moment().format("dddd, MMMM Do, YYYY")}</p></div>
                     <div className="item-panel bigitem"><p>blahhhhhhhhhhhh</p></div>
+                    <div className="item-panel maxitem"><Schedules view='month'/></div>
                 </div>
                 {/* <table cellSpacing='20px' width='100%' height='1400px' border="5px">
                 <tbody>
