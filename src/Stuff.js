@@ -6,7 +6,9 @@ import { rand } from "./Main";
 // import {ArrayStore}  from "devextreme";
 import List from "./components/list";
 import moment from "moment";
+import { y } from "./data/weekly";
 import Schedules from "./data/weekly";
+
 var x = [
     { name: 'BLAAAAhhhh', title: 'You know it' },
     { name: 'Test2', title: 'A title' }
@@ -53,7 +55,7 @@ class Stuff extends Component {
                         />
                     </div>
                     <div className="item-panel bigitem">
-                        <DataGrid dataSource={x} />
+                        <DataGrid dataSource={x} ref={(ref) => ref ? this.grid = ref.instance : null} />
                     </div>
                     <div className="item-panel bigitem">
                         <h1>Paul Stuff</h1>
@@ -71,7 +73,7 @@ class Stuff extends Component {
                         <List />
                     </div>
                     <div className='item-panel maxitem'>
-                        <Schedules view='day' />
+                        <Schedules view='month' />
                     </div>
                 </div>
             </div>
