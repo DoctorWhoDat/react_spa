@@ -8,8 +8,11 @@ import Home from "./Home";
 import Stuff from "./Stuff";
 import Contact from "./Contact";
 
+import y from "./data/weekly";
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Hidden from '@material-ui/core/Hidden';
 import Drawer from "@material-ui/core/Drawer";
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -17,7 +20,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/core/Menu';
+import MenuIcon from '@material-ui/icons/Menu';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
 export function rand(min, max) {
     var x = max - min + 1;
@@ -27,7 +32,6 @@ export function rand(min, max) {
     // }
     return Math.floor(Math.random() * x + min);
 }
-
 class Main extends Component {
     constructor(props) {
         super(props);
@@ -54,40 +58,61 @@ class Main extends Component {
             dropdownOpen: !this.state.dropdownOpen
         });
     }
+
+    drawer(variant) {
+        return (<Drawer
+            // className="test"
+            variant={variant}
+            anchor="left"
+            open={this.state.mobileOpen}
+            onClose={this.handleDrawerToggle}
+            ModalProps={{ keepMounted: true }}
+        >
+            <List>
+                {['Home', 'Stuff', 'Contact'].map((text, index) => (
+                    <ListItem button key={text}>
+                        {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                        {text === 'Home' ? <NavLink exact to='/'><ListItemText primary={text} /></NavLink> : <NavLink to={'/' + text}><ListItemText primary={text} /></NavLink>}
+                    </ListItem>
+                ))}
+            </List>
+            {/* <Divider />
+        <List>
+            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                <ListItem button key={text}>
+                    <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> 
+                    <ListItemText primary={text} />
+                </ListItem>
+            ))}
+        </List> */}
+        </Drawer>)
+    }
+    // componentWillMount() {
+    //     const mediaQuery = window.matchMedia('(max-width: 768px)');
+    //     if(mediaQuery.matches){
+    //         this.setState({mobileOpen: false});
+    //     }
+    // }
     render() {
         return (
             <BrowserRouter>
                 <div >
-                    <AppBar style={{ }} position="fixed" >
-                        <IconButton color="inherit" aria-label="Menu">
-                            <MenuIcon />
-                            hi
-                        </IconButton>
+                    <AppBar position="fixed" >
+                        <Toolbar className='tes'>
+                            <Hidden smUp>
+                                <IconButton color="inherit" aria-label="Menu" onClick={this.handleDrawerToggle}>
+                                    <MenuIcon />
+                                </IconButton>
+                            </Hidden>
+                            <span>Welcome to Gretna Bingo!</span>
+                        </Toolbar>
                     </AppBar>
-                    <Drawer
-                        variant="permanent"
-                        anchor="left"
-                        // open={this.state.mobileOpen}
-                        onClose={this.handleDrawerToggle}
-                    >
-                        <List>
-                            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                                <ListItem button key={text}>
-                                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            ))}
-                        </List>
-                        <Divider />
-                        <List>
-                            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                                <ListItem button key={text}>
-                                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Drawer>
+                    <Hidden smUp>
+                        {this.drawer('temporary')}
+                    </Hidden>
+                    <Hidden smDown>
+                        {this.drawer('permanent')}
+                    </Hidden>
                     {/* <Navbar color="orange" dark expand="md" scrolling fixed="top">
                         <NavbarBrand style={{ color: '#fff' }}>
                             <strong>Navbar</strong>
@@ -160,5 +185,5 @@ class Main extends Component {
         )
     }
 }
-
+window.onresize = Main.handleDrawerToggle;
 export default Main;

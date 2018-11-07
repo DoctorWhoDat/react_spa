@@ -2,7 +2,7 @@ body {
     background-color: #a1a1a1;
     /* padding: 20px; */
     margin: 0;
-    /* margin-top: 80px; */
+    margin-top: 80px;
     margin-left: 150px;
 }
 
@@ -140,14 +140,6 @@ h1, h2, p, ul, li {
   position: relative;
 }
 
-@media screen and (max-width: 768px) {
-  .smallitem,
-  .bigitem,
-  .xsmallitem {
-    -webkit-flex: 0 1 100%;
-    flex: 0 1 100%;
-  }
-}
 
 .item-panel {
   padding: 10px;
@@ -175,7 +167,24 @@ h1, h2, p, ul, li {
   font-weight: 700;
   color: white;
 }
+.tes {
+  margin-left: 150px;
+}
 
-.list {
-  width: 1000px;
+@media screen and (max-width: 768px) {
+  .smallitem,
+  .bigitem,
+  .xsmallitem {
+    -webkit-flex: 0 1 100%;
+    flex: 0 1 100%;
+  }
+
+  body { 
+    margin-left: 0px;
+  }
+
+  .tes {
+    margin-left: 0px;
+    background-color: red;
+  }
 }

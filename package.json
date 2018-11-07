@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.4.0",
+    "@material-ui/icons": "^3.0.1",
     "devextreme": "^18.1.7",
     "devextreme-react": "^18.1.4-alpha.8",
     "mdbreact": "^4.8.2",
