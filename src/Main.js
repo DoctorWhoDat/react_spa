@@ -8,6 +8,17 @@ import Home from "./Home";
 import Stuff from "./Stuff";
 import Contact from "./Contact";
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Drawer from "@material-ui/core/Drawer";
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/core/Menu';
+
 export function rand(min, max) {
     var x = max - min + 1;
 
@@ -21,14 +32,17 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            mobileOpen: false,
             collapse: false,
             isWideEnough: false,
             dropdownOpen: false
         };
         this.onClick = this.onClick.bind(this);
         this.toggle = this.toggle.bind(this);
-    }
-
+    };
+    handleDrawerToggle = () => {
+        this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+    };
     onClick() {
         this.setState({
             collapse: !this.state.collapse,
@@ -44,7 +58,37 @@ class Main extends Component {
         return (
             <BrowserRouter>
                 <div >
-                    <Navbar color="orange" dark expand="md" scrolling fixed="top">
+                    <AppBar style={{ }} position="fixed" >
+                        <IconButton color="inherit" aria-label="Menu">
+                            <MenuIcon />
+                            hi
+                        </IconButton>
+                    </AppBar>
+                    <Drawer
+                        variant="permanent"
+                        anchor="left"
+                        // open={this.state.mobileOpen}
+                        onClose={this.handleDrawerToggle}
+                    >
+                        <List>
+                            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                                <ListItem button key={text}>
+                                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                                    <ListItemText primary={text} />
+                                </ListItem>
+                            ))}
+                        </List>
+                        <Divider />
+                        <List>
+                            {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                                <ListItem button key={text}>
+                                    {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+                                    <ListItemText primary={text} />
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Drawer>
+                    {/* <Navbar color="orange" dark expand="md" scrolling fixed="top">
                         <NavbarBrand style={{ color: '#fff' }}>
                             <strong>Navbar</strong>
                         </NavbarBrand>
@@ -76,7 +120,7 @@ class Main extends Component {
                                 sfsf
                             </NavbarNav>
                         </Collapse>
-                    </Navbar>
+                    </Navbar> */}
                     {/* <Navbar fixedTop={true} inverse>
                     <Navbar.Header>
                         <Navbar.Brand>

@@ -2,7 +2,8 @@ body {
     background-color: #a1a1a1;
     /* padding: 20px; */
     margin: 0;
-    margin-top: 80px;
+    /* margin-top: 80px; */
+    margin-left: 150px;
 }
 
 h1, h2, p, ul, li {
@@ -173,4 +174,8 @@ h1, h2, p, ul, li {
   font-size: 24px;
   font-weight: 700;
   color: white;
+}
+
+.list {
+  width: 1000px;
 }
