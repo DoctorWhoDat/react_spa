@@ -99,7 +99,7 @@ class Main extends Component {
                 <div >
                     <AppBar position="fixed" >
                         <Toolbar className='tes'>
-                            <Hidden smUp>
+                            <Hidden mdUp>
                                 <IconButton color="inherit" aria-label="Menu" onClick={this.handleDrawerToggle}>
                                     <MenuIcon />
                                 </IconButton>
@@ -107,7 +107,7 @@ class Main extends Component {
                             <span>Welcome to Gretna Bingo!</span>
                         </Toolbar>
                     </AppBar>
-                    <Hidden smUp>
+                    <Hidden mdUp>
                         {this.drawer('temporary')}
                     </Hidden>
                     <Hidden smDown>
