@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, BrowserRouter, Link as RouterLink } from "react-router-dom";
 // import { Navbar, Nav, NavItem } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
 import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
@@ -7,6 +7,7 @@ import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLi
 import Home from "./Home";
 import Stuff from "./Stuff";
 import Contact from "./Contact";
+import TestHook from "./TestHook";
 
 import y from "./data/weekly";
 
@@ -23,6 +24,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import Link from '@material-ui/core/Link';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import Plus from '@material-ui/icons/MoreHoriz';
 
 export function rand(min, max) {
     var x = max - min + 1;
@@ -39,7 +45,8 @@ class Main extends Component {
             mobileOpen: false,
             collapse: false,
             isWideEnough: false,
-            dropdownOpen: false
+            dropdownOpen: false,
+            anchorEl: null
         };
         this.onClick = this.onClick.bind(this);
         this.toggle = this.toggle.bind(this);
@@ -59,7 +66,13 @@ class Main extends Component {
         });
     }
 
+    handleMenuClick = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+    handleMenuClose = () => { this.setState({ anchorEl: null }) };
+
     drawer(variant) {
+        const { anchorEl } = this.state;
         return (<Drawer
             // className="test"
             variant={variant}
@@ -74,7 +87,26 @@ class Main extends Component {
                         {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
                         {text === 'Home' ? <NavLink exact to='/'><ListItemText primary={text} /></NavLink> : <NavLink to={'/' + text}><ListItemText primary={text} /></NavLink>}
                     </ListItem>
+
                 ))}
+                <Divider />
+                <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true"
+                    component={RouterLink} style={{ textTransform: 'none', textAlign: 'center', width: '100%', marginTop: '15px' }}
+                    onClick={this.handleMenuClick}>
+                    {/* <ListItemText primary="Open Menu" /> */}
+                    <Plus />
+                </Button>
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    open={Boolean(anchorEl)}
+                    onClose={this.handleMenuClose}
+                    MenuListProps={{ onClick: this.handleMenuClose }}
+                >
+                    <MenuItem component={RouterLink} to='/TestHook'>Test</MenuItem>
+                    <MenuItem component={RouterLink} to='/'>Home</MenuItem>
+                    <MenuItem component={RouterLink} to='/Contact'>Contact</MenuItem>
+                </Menu>
             </List>
             {/* <Divider />
         <List>
@@ -104,7 +136,7 @@ class Main extends Component {
                                     <MenuIcon />
                                 </IconButton>
                             </Hidden>
-                            <span>Welcome to Gretna Bingo!</span>
+                            <span>Welcome to React SPA!</span>
                         </Toolbar>
                     </AppBar>
                     <Hidden mdUp>
@@ -178,6 +210,7 @@ class Main extends Component {
                         <Route exact path="/" component={Home} />
                         <Route path="/stuff" component={Stuff} />
                         <Route path="/contact" component={Contact} />
+                        <Route path="/TestHook" render={(props) => <TestHook init={10} />} />
                     </div>
                     {/* <div className="footer">Footer goes here</div> */}
                 </div>
