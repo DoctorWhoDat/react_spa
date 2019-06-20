@@ -5,6 +5,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Plus from '@material-ui/icons/MoreHoriz';
 
+import NewList from './components/newList';
+
 export default function TestHook(props) {
     const [count, setCount] = useState(props.init);
     const [i, setI] = useState(Math.floor(Math.random() * count));
@@ -34,7 +36,7 @@ export default function TestHook(props) {
             >-</Button>
 
             <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true"
-                style={{ textTransform: 'none', textAlign: 'center',  marginTop: '15px', marginLeft: '20px' }}
+                style={{ textTransform: 'none', textAlign: 'center', marginTop: '15px', marginLeft: '20px' }}
                 onClick={handleMenuClick} variant='outlined'>
                 {/* <ListItemText primary="Open Menu" /> */}
                 <Plus />
@@ -51,6 +53,7 @@ export default function TestHook(props) {
                 <MenuItem component={RouterLink} to='/'>Home</MenuItem>
                 <MenuItem component={RouterLink} to='/Contact'>Contact</MenuItem>
             </Menu>
+            <NewList />
         </div >
     );
 }

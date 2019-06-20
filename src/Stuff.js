@@ -5,6 +5,7 @@ import { TextBox, Button, DataGrid, Scheduler } from "devextreme-react";
 import { rand } from "./Main";
 // import {ArrayStore}  from "devextreme";
 import List from "./components/list";
+import NewList from "./components/newList";
 import moment from "moment";
 import { y } from "./data/weekly";
 import Schedules from "./data/weekly";
@@ -67,6 +68,9 @@ class Stuff extends Component {
                         />
 
                         <Button text='Go to the TextBox' onClick={() => this.textBox.focus()} />
+                    </div>
+                    <div className="item-panel xsmallitem">
+                        <NewList />
                     </div>
                     <div className="item-panel xsmallitem">
                         {/* <List array={arr} /> passes prop called array*/}
