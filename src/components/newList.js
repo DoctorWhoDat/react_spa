@@ -63,11 +63,21 @@ function getDay() {
     };
 };
 
+function badChars(str) {
+    let chars = ['G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    let bad = false
+    chars.forEach(i => {
+        if (str.indexOf(i) !== -1) { 
+            bad = true; }
+    });
+    return bad;
+};
+
 export default function NewList(props) {
     const [disp, setDisp] = useState('inline-block');
     const [color, setColor] = useState('#123456');
     let list = [];
-    
+
     y.forEach(i => {
         if (getDay() === i.day) {
             list.push(<div>
@@ -80,9 +90,13 @@ export default function NewList(props) {
     });
     return (<div>
         <TextField style={{ marginBottom: '15px' }} label='Background Color' value={color}
-            onChange={e => setColor(e.target.value)} 
+            onChange={function (e) {
+                if (badChars(e.target.value.toUpperCase()) || e.target.value.length > 7) { setColor(color); }
+                else { setColor(e.target.value); }
+            }}
             variant='outlined'
-            />
+        />
+        <br />
         <List style={{ backgroundColor: color, border: 'solid', borderWidth: '1px', display: disp }}>
             <ListItemText style={{ textAlign: 'center' }} primary={color + '\'s Games'}></ListItemText>
             <Divider />

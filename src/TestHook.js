@@ -7,6 +7,9 @@ import Plus from '@material-ui/icons/MoreHoriz';
 
 import NewList from './components/newList';
 
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+
 export default function TestHook(props) {
     const [count, setCount] = useState(props.init);
     const [i, setI] = useState(Math.floor(Math.random() * count));

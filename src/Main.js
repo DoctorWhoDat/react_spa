@@ -1,8 +1,8 @@
-import React, { Component } from "react"
+import React, { Component, useState } from "react"
 import { Route, BrowserRouter, Link as RouterLink } from "react-router-dom";
 // import { Navbar, Nav, NavItem } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
-import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
+// import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
 
 import Home from "./Home";
 import Stuff from "./Stuff";
@@ -10,6 +10,7 @@ import Contact from "./Contact";
 import TestHook from "./TestHook";
 
 import y from "./data/weekly";
+import BottomNav from './components/BottomNav';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -71,23 +72,24 @@ class Main extends Component {
     };
     handleMenuClose = () => { this.setState({ anchorEl: null }) };
 
-    drawer(variant) {
+    drawer(variant, anchor) {
         const { anchorEl } = this.state;
         return (<Drawer
             // className="test"
             variant={variant}
-            anchor="left"
+            anchor={anchor}
             open={this.state.mobileOpen}
             onClose={this.handleDrawerToggle}
             ModalProps={{ keepMounted: true }}
         >
-            <List>
+            <List style={{minWidth: '150px'}}>
                 {['Home', 'Stuff', 'Contact'].map((text, index) => (
-                    <ListItem button key={text}>
+                    <ListItem button component={RouterLink} to={text !== 'Home' ? '/' + text : '/'} >
                         {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-                        {text === 'Home' ? <NavLink exact to='/'><ListItemText primary={text} /></NavLink> : <NavLink to={'/' + text}><ListItemText primary={text} /></NavLink>}
-                    </ListItem>
+                        {/* {text === 'Home' ? <NavLink exact to='/'><ListItemText primary={text} /></NavLink> : <NavLink to={'/' + text}><ListItemText primary={text} /></NavLink>} */}
 
+                        <ListItemText primary={text} />
+                    </ListItem>
                 ))}
                 <Divider />
                 <Button aria-owns={anchorEl ? 'simple-menu' : null} aria-haspopup="true"
@@ -140,10 +142,10 @@ class Main extends Component {
                         </Toolbar>
                     </AppBar>
                     <Hidden mdUp>
-                        {this.drawer('temporary')}
+                        {this.drawer('temporary', 'bottom')}
                     </Hidden>
                     <Hidden smDown>
-                        {this.drawer('permanent')}
+                        {this.drawer('permanent', 'left')}
                     </Hidden>
                     {/* <Navbar color="orange" dark expand="md" scrolling fixed="top">
                         <NavbarBrand style={{ color: '#fff' }}>
@@ -207,12 +209,15 @@ class Main extends Component {
                     </ul> */}
 
                     <div className='content'>
-                        <Route exact path="/" component={Home} />
+                        <Route exact path="/"  render={(props)=> <Home title='Home' />} />
                         <Route path="/stuff" component={Stuff} />
                         <Route path="/contact" component={Contact} />
                         <Route path="/TestHook" render={(props) => <TestHook init={10} />} />
                     </div>
                     {/* <div className="footer">Footer goes here</div> */}
+                    <Hidden mdUp>
+                        <BottomNav />
+                    </Hidden>
                 </div>
             </BrowserRouter>
         )
