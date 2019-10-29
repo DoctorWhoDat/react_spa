@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react"
-import { Route, BrowserRouter, Link as RouterLink } from "react-router-dom";
+import { Route, BrowserRouter, Link as RouterLink, Switch } from "react-router-dom";
 // import { Navbar, Nav, NavItem } from "react-bootstrap"
 import { LinkContainer } from "react-router-bootstrap"
 // import { Navbar, NavbarBrand, NavbarNav, NavbarToggler, Collapse, NavItem, NavLink, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'mdbreact';
@@ -82,7 +82,7 @@ class Main extends Component {
             onClose={this.handleDrawerToggle}
             ModalProps={{ keepMounted: true }}
         >
-            <List style={{minWidth: '150px'}}>
+            <List style={{ minWidth: '150px' }}>
                 {['Home', 'Stuff', 'Contact'].map((text, index) => (
                     <ListItem button component={RouterLink} to={text !== 'Home' ? '/' + text : '/'} >
                         {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
@@ -209,10 +209,15 @@ class Main extends Component {
                     </ul> */}
 
                     <div className='content'>
-                        <Route exact path="/"  render={(props)=> <Home title='Home' />} />
-                        <Route path="/stuff" component={Stuff} />
-                        <Route path="/contact" component={Contact} />
-                        <Route path="/TestHook" render={(props) => <TestHook init={10} />} />
+                        <Switch>
+                            <Route exact path="/" render={(props) => <Home title='Home' />} />
+                            <Route path="/stuff" component={Stuff} />
+                            <Route path="/contact" component={Contact} />
+                            <Route path="/TestHook" render={(props) => <TestHook init={10} />} />
+                            <Route>
+                                Oops!! Bad path
+                            </Route>
+                        </Switch>
                     </div>
                     {/* <div className="footer">Footer goes here</div> */}
                     <Hidden mdUp>
